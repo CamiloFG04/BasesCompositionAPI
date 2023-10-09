@@ -3,10 +3,12 @@
   <h2 v-else>Usuarios</h2>
   <h5 v-if="errorMessage">{{errorMessage}}</h5>
   <div v-if="users.length > 0">
-    <user-list :users="users" v-slot="{user}">
-        <h4>{{user.first_name}} {{user.last_name}}</h4>
-        <h6>{{user.email}}</h6>
-    </user-list>
+    <ul>
+        <li v-for="user in users" :key="user.id">
+            <h4>{{user.first_name}} {{user.last_name}}</h4>
+            <h6>{{user.email}}</h6>
+        </li>
+    </ul>
   </div>
   <button @click="aftherPage">Atras</button>
   <button @click="nextPage">Siguiente </button>
@@ -15,10 +17,8 @@
 
 <script>
 import useUsers from "@/composables/useUser";
-import UserList from '@/components/UserList.vue';
 
 export default {
-  components: { UserList },
     setup(){
         const {
                 aftherPage,
